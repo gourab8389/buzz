@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Environment, Float, View } from "@react-three/drei";
+import { View } from "@react-three/drei";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import FloatingCan from "@/components/FloatingCan";
@@ -33,11 +33,9 @@ export default function ViewCanvas({ }: Props) {
                     fov: 30,
                 }}
             >
-                {/* <Suspense fallback={null}>
                 <View.Port />
+                {/* <Suspense fallback={null}>
                 </Suspense> */}
-                <FloatingCan/>
-                <Environment files="/hdr/lobby.hdr" environmentIntensity={1.5} />
             </Canvas>
             {/* <Loader /> */}
         </>
