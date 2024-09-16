@@ -19,9 +19,8 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       <PrismicRichText field={slice.primary.heading} />
       <PrismicRichText field={slice.primary.subheading} />
       <PrismicRichText field={slice.primary.body} />
-      {slice.primary.button_text}
       <PrismicNextLink field={slice.primary.button_link}>
-        Link
+        {slice.primary.button_text}
       </PrismicNextLink>
       <PrismicNextImage field={slice.primary.cans_image} />
       <PrismicRichText field={slice.primary.second_heading} />
