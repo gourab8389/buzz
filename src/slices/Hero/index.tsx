@@ -1,15 +1,18 @@
 "use client"
 import { asText, Content } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { Bounded } from "@/components/Bounded";
 import Button from "@/components/Button";
 import { TextSplitter } from "@/components/TextSpliter";
 
-gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
+
 /**
  * Props for `Hero`.
  */
@@ -46,7 +49,43 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         opacity: 0,
         y: 10,
         duration: .6
+      });
+
+      const scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.5,
+        }
       })
+
+
+      scrollTl
+          .fromTo("body", {
+            backgroundColor: "#10f3a5",
+          },
+        {
+          backgroundColor: "#A9F99D",
+          overwrite: "auto"
+        },
+        1,
+      ).from(".text-side-heading .split-char", {
+        scale: 1.3,
+        y:40,
+        rotate:-25,
+        opacity:0,
+        stagger: .1,
+        ease: "back.out(3)",
+        duration: .5
+      
+      })
+      .from(".text-side-body", {
+        y: 20,
+        opacity: 0,
+        
+      })
+
   })
 
   return (
@@ -58,7 +97,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       <div className="grid">
         <div className="grid h-screen place-items-center">
           <div className="grid auto-rows-min place-items-center text-center">
-            <h1 className="hero-header lg:text-[11rem] text-7xl font-black uppercase leading-[.8] text-emerald-800 md:text-[9rem]">
+            <h1 className="hero-header lg:text-[13rem] text-7xl font-black uppercase leading-[.8] text-orange-500 md:text-[9rem]">
               <TextSplitter
                 text={asText(slice.primary.heading)}
                 wordDisplayStyle="block"
