@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, Float, View } from "@react-three/drei";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import { SodaCan } from "./Sodacan";
+import FloatingCan from "@/components/FloatingCan";
 
 const Loader = dynamic(
     () => import("@react-three/drei").then((mod) => mod.Loader),
@@ -36,14 +36,7 @@ export default function ViewCanvas({ }: Props) {
                 {/* <Suspense fallback={null}>
                 <View.Port />
                 </Suspense> */}
-                <Float
-                    speed={1}
-                    rotationIntensity={2}
-                    floatIntensity={1}
-                    floatingRange={[-0.1, 0.1]}
-                >
-                    <SodaCan />
-                </Float>
+                <FloatingCan/>
                 <Environment files="/hdr/lobby.hdr" environmentIntensity={1.5} />
             </Canvas>
             {/* <Loader /> */}
