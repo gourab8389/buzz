@@ -12,6 +12,8 @@ import { TextSplitter } from "@/components/TextSpliter";
 import { View } from "@react-three/drei";
 import Scene from "./Scene";
 import { Bubbles } from "./Bubbles";
+import { useStore } from "@/hooks/useStore";
+
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -25,8 +27,10 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero = ({ slice }: HeroProps): JSX.Element => {
+  const ready = useStore((state) => state.ready)
 
   useGSAP(() => {
+    if(!ready) return;
     const introTl = gsap.timeline()
 
     introTl
@@ -89,7 +93,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         
       })
 
-  })
+  },{dependencies: [ready]})
 
   return (
     <Bounded
