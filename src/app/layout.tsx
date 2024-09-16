@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en" className={alpino.variable}>
       <body className="overflow-x-hidden bg-teal-500">
         <Header/>
-        <main>{children}</main>
+        <main className="mt-8">{children}</main>
       </body>
       <PrismicPreview repositoryName={repositoryName} />
     </html>
