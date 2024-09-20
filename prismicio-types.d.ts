@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type PageDocumentDataSlicesSlice = never;
+type PageDocumentDataSlicesSlice = SkyDriveSlice;
 
 /**
  * Content for Page documents
@@ -190,6 +190,65 @@ type HeroSliceVariation = HeroSliceDefault;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Primary content in *SkyDrive → Default → Primary*
+ */
+export interface SkyDriveSliceDefaultPrimary {
+  /**
+   * Sentence field in *SkyDrive → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sky_drive.default.primary.sentence
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sentence: prismic.KeyTextField;
+
+  /**
+   * Flavor field in *SkyDrive → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: lemonLime
+   * - **API ID Path**: sky_drive.default.primary.flavor
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  flavor: prismic.SelectField<
+    "lemonLime" | "grape" | "blackCherry" | "strawberryLemonade" | "watermelon",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for SkyDrive Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SkyDriveSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SkyDriveSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SkyDrive*
+ */
+type SkyDriveSliceVariation = SkyDriveSliceDefault;
+
+/**
+ * SkyDrive Shared Slice
+ *
+ * - **API ID**: `sky_drive`
+ * - **Description**: SkyDrive
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SkyDriveSlice = prismic.SharedSlice<
+  "sky_drive",
+  SkyDriveSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -208,6 +267,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      SkyDriveSlice,
+      SkyDriveSliceDefaultPrimary,
+      SkyDriveSliceVariation,
+      SkyDriveSliceDefault,
     };
   }
 }
